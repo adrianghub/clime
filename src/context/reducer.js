@@ -1,6 +1,3 @@
-require('dotenv').config()
-
-
 export const initialState = {
   counter: 0,
 }
