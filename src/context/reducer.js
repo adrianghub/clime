@@ -1,6 +1,11 @@
+require('dotenv').config()
+
+
 export const initialState = {
   counter: 0,
 }
+
+
 
 // state -> anything inside of reducer, action -> manipulating the data layer
 export default function reducer(state, action) {
