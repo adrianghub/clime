@@ -28,7 +28,7 @@ const Btn = () => {
   }
 
   return (
-  <Button className={classes.btn} onClick={incCounterNumber}>CRA Boilerplate</Button>
+  <Button className={classes.btn} onClick={incCounterNumber}>Show Forecast</Button>
   );
 };
 

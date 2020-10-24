@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Btn from "./components/Btn/Btn";
-import { useStateValue } from "./context/StateProvider";
+// import { useStateValue } from "./context/StateProvider";
 import { fetchApi } from "./api/api";
+import Form from "./components/Form/Form";
 
 const useStyles = makeStyles({
   root: {
@@ -16,24 +16,11 @@ const useStyles = makeStyles({
     justifyContent: "center",
     color: "white",
   },
-  container: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    width: "400px",
-    minHeight: "364px",
-    padding: "1rem",
-    borderRadius: "5px",
-    boxShadow: "0 0px 10px #111",
-    mixBlendMode: "difference",
-    userSelect: "none",
-  },
 });
 
 function App() {
   const classes = useStyles();
-  const [{ counter }] = useStateValue();
+  // const [{ counter }] = useStateValue();
 
   useEffect(() => {
     fetchApi();
@@ -41,10 +28,7 @@ function App() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.container}>
-        <Btn />
-        <p>{counter}</p>
-      </div>
+      <Form />
     </div>
   );
 }
