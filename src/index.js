@@ -4,6 +4,8 @@ import App from "./App";
 import reducer, { initialState } from "./context/reducer";
 import { StateProvider } from "./context/StateProvider";
 
+import './index.css'
+
 ReactDOM.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>
