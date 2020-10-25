@@ -37,6 +37,9 @@ const useStyles = makeStyles({
     fontWeight: "700",
     textShadow: "3px 3px 3px rgba(50, 50, 70, 0.5)",
   },
+  weatherImg: {
+    marginLeft: '20px',
+  }
 });
 
 // new Date().toDateString()
@@ -88,8 +91,19 @@ const InfoBox = ({ weather }) => {
         <div className={classes.date}>{date(new Date())}</div>
       </div>
       <div className={classes.weatherBox}>
-        <div className={classes.temp}> {Math.round(weather?.data.main.temp)}&#176;C</div>
-        <div className={classes.weather}>{weather?.data.weather[0].main}</div>
+        <div className={classes.temp}>
+          {Math.round(weather?.data.main.temp)}&#176;C
+        </div>
+        <div className={classes.weather}>
+          {weather?.data.weather[0].main}
+          {weather?.data.weather[0].icon ? (
+            <img
+              className={classes.weatherImg}
+              src={`http://openweathermap.org/img/w/${weather?.data.weather[0].icon}.png`}
+              alt="weather condition"
+            />
+          ) : null}
+        </div>
       </div>
     </>
   ) : null;

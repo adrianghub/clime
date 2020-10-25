@@ -12,7 +12,6 @@ import warmRain from "./assets/warm-rain.jpg";
 import coldRain from "./assets/cold-rain.jpg";
 import SearchBox from "./components/SearchBox/SearchBox";
 import InfoBox from "./components/InfoBox/InfoBox";
-import { useEffect } from "react";
 
 require("dotenv").config();
 
@@ -60,36 +59,54 @@ function App() {
   const [weather, setWeather] = useState({});
 
   // const [{ counter }] = useStateValue();
-  useEffect(() => {
-    const fetchData = async () => {
-      const request = axios.get(
-        `${ENDPOINT}weather?q=${query}&units=metric&APPID=${REACT_APP_WEATHER_API_KEY}`
-      );
-      const response = await request;
-      setWeather(response);
-      setQuery("");
+  const searchQuery = async (e) => {
+    if (e.key === "Enter") {
+      try {
+        const request = axios.get(
+          `${ENDPOINT}weather?q=${query}&units=metric&APPID=${REACT_APP_WEATHER_API_KEY}`
+        );
+        const response = await request;
+        setWeather(response);
+        setQuery("");
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
     }
-    setTimeout(() => {fetchData()}, 2000);
-  }, [query]);
+  };
 
   const handleInputChange = (e) => setQuery(e.target.value);
 
   return (
-    <div className={(typeof weather.data !== "undefined") ? 
-    (
-      (weather?.data.main.temp > 11 && weather?.data.weather[0].main === "Clear") ? [classes.warm, classes.root].join(' ') : 
-      (weather?.data.main.temp > 11 && weather?.data.weather[0].main === "Clouds") ? [classes.warmClouds, classes.root].join(' ')  : 
-      (weather?.data.main.temp > 11 && weather?.data.weather[0].main === "Rain") ? [classes.warmRain, classes.root].join(' ') :
-      (weather?.data.main.temp <= 11 && weather?.data.weather[0].main === "Clouds") ? [classes.coldClouds, classes.root].join(' ') :
-      (weather?.data.main.temp <= 11 && weather?.data.weather[0].main === "Rain") ? [classes.coldRain, classes.root].join(' ') :
-      [classes.cold, classes.root].join(' ')
-    ) : classes.root}>
+    <div
+      className={
+        typeof weather.data !== "undefined"
+          ? weather?.data.main.temp > 11 &&
+            weather?.data.weather[0].main === "Clear"
+            ? [classes.warm, classes.root].join(" ")
+            : weather?.data.main.temp > 11 &&
+              weather?.data.weather[0].main === "Clouds"
+            ? [classes.warmClouds, classes.root].join(" ")
+            : weather?.data.main.temp > 11 &&
+              weather?.data.weather[0].main === "Rain"
+            ? [classes.warmRain, classes.root].join(" ")
+            : weather?.data.main.temp <= 11 &&
+              weather?.data.weather[0].main === "Clouds"
+            ? [classes.coldClouds, classes.root].join(" ")
+            : weather?.data.main.temp <= 11 &&
+              weather?.data.weather[0].main === "Rain"
+            ? [classes.coldRain, classes.root].join(" ")
+            : [classes.cold, classes.root].join(" ")
+          : classes.root
+      }
+    >
       <main className={classes.main}>
         <SearchBox
           query={query}
           handleInputChange={handleInputChange}
+          handleKeyPress={searchQuery}
         />
-        <InfoBox weather={weather}/>
+        <InfoBox weather={weather} />
       </main>
     </div>
   );
