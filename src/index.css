@@ -7,4 +7,5 @@
 html {
   font-family: 'Montserratt', sans-serif;
   box-sizing: border-box;
+  overflow: hidden;
 }
