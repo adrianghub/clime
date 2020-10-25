@@ -17,7 +17,7 @@ import { useEffect } from "react";
 require("dotenv").config();
 
 const { REACT_APP_WEATHER_API_KEY } = process.env;
-const ENDPOINT = "http://api.openweathermap.org/data/2.5/";
+const ENDPOINT = "https://api.openweathermap.org/data/2.5/";
 
 const useStyles = makeStyles({
   root: {
